@@ -2,7 +2,7 @@ class Scroller {
   constructor(mainElement) {
     const rootElement = document.querySelector(mainElement);
     this.sections = [...document.querySelectorAll('[data-section]')]
-    this.currentSectionIndex = 0
+    this.currentSectionIndex = this.sections.findIndex(this.isScrolledInToView)
     this.isThrottled = false
   }
   listenScroll = (e) => {
@@ -10,6 +10,7 @@ class Scroller {
     this.isThrottled = true
     setTimeout(() => this.isThrottled = false, 1000)
     const direction = e.wheelDelta > 0 ? -1 : 1;
+
     this.scroll(direction)
   }
 
@@ -22,6 +23,7 @@ class Scroller {
       if (firstSection) return
     }
     this.currentSectionIndex = this.currentSectionIndex + direction;
+
     this.scrollToCurrentSection(this.currentSectionIndex)
   }
 
@@ -30,5 +32,13 @@ class Scroller {
       behavior: "smooth",
       block: "center",
     });
+  }
+
+  isScrolledInToView = (item) => {
+    const rect = item.getBoundingClientRect();
+    const itemTop = rect.top;
+    const itemBottom = Math.floor(rect.bottom);
+    const isVisible = (itemTop >= 0) && (itemBottom <= window.innerHeight)
+    return isVisible;
   }
 }
