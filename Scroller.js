@@ -49,9 +49,13 @@ class Scroller {
     this.navigationContainer.setAttribute('class', 'aside-navigation')
     const ListItems = document.createElement('ul')
     ListItems.setAttribute('class', 'aside-navigation__list-items')
-    this.sections.forEach((section) => {
+    this.sections.forEach((section, index) => {
       const item = document.createElement('li')
       item.setAttribute('class', 'aside-navigation__item')
+      item.addEventListener('click', () => {
+        this.currentSectionIndex = index;
+        this.scrollToCurrentSection(this.currentSectionIndex);
+      })
       ListItems.appendChild(item)
     })
     this.navigationContainer.appendChild(ListItems)
