@@ -21,3 +21,32 @@ html {
     text-align: justify;
   }
 }
+
+.aside-navigation {
+  position: fixed;
+  right: 30px;
+  top: 40%;
+  transform: translate(0, -50%);
+
+  &__list-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+    justify-content: space-evenly;
+  }
+
+  &__item {
+    width: 10px;
+    height: 10px;
+    background-color: gray;
+    border-radius: 50%;
+    opacity: 0.5;
+    transition: 0.5s;
+
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

@@ -4,6 +4,8 @@ class Scroller {
     this.sections = [...document.querySelectorAll('[data-section]')]
     this.currentSectionIndex = this.sections.findIndex(this.isScrolledInToView)
     this.isThrottled = false
+
+    this.drawNavigation()
   }
   listenScroll = (e) => {
     if (this.isThrottled) return
@@ -40,5 +42,20 @@ class Scroller {
     const itemBottom = Math.floor(rect.bottom);
     const isVisible = (itemTop >= 0) && (itemBottom <= window.innerHeight)
     return isVisible;
+  }
+
+  drawNavigation = () => {
+    this.navigationContainer = document.createElement('aside')
+    this.navigationContainer.setAttribute('class', 'aside-navigation')
+    const ListItems = document.createElement('ul')
+    ListItems.setAttribute('class', 'aside-navigation__list-items')
+    this.sections.forEach((section) => {
+      const item = document.createElement('li')
+      item.setAttribute('class', 'aside-navigation__item')
+      ListItems.appendChild(item)
+    })
+    this.navigationContainer.appendChild(ListItems)
+    document.body.appendChild(this.navigationContainer)
+
   }
 }
