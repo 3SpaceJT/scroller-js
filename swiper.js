@@ -11,7 +11,6 @@ class Swiper {
     }
   }
   startTouch(e) {
-    e.preventDefault()
     this.initialY = e.touches[0].clientY;
   }
 
@@ -22,7 +21,7 @@ class Swiper {
     }
     const currentY = e.touches[0].clientY;
     const deltaY = this.initialY - currentY;
-    if (deltaY > 0) {
+    if (deltaY < 0) {
       document.dispatchEvent(this.events.swipeDown);
     } else {
       document.dispatchEvent(this.events.swipeUp);
