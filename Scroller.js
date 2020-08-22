@@ -30,6 +30,7 @@ class Scroller {
   }
 
   scrollToCurrentSection = (index) => {
+    this.isActiveDot()
     this.sections[index].scrollIntoView({
       behavior: "smooth",
       block: "center",
@@ -60,6 +61,17 @@ class Scroller {
     })
     this.navigationContainer.appendChild(ListItems)
     document.body.appendChild(this.navigationContainer)
+    this.isActiveDot()
+  }
 
+  isActiveDot = () => {
+    this.navigationItems = this.navigationContainer.querySelectorAll('li');
+    this.navigationItems.forEach((item, index) => {
+      if (this.currentSectionIndex === index) {
+        item.classList.add('aside-navigation__item--active')
+      } else {
+        item.classList.remove('aside-navigation__item--active')
+      }
+    })
   }
 }
