@@ -11,7 +11,7 @@ class Scroller {
     if (this.isThrottled) return
     this.isThrottled = true
     setTimeout(() => this.isThrottled = false, 1000)
-    const direction = e.wheelDelta > 0 ? -1 : 1;
+    const direction = e.deltaY < 0 ? -1 : 1;
 
     this.scroll(direction)
   }
